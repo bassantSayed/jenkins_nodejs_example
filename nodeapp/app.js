@@ -1,12 +1,9 @@
 const express = require('express')
-const app = express()
-const port = 3002
 var redis = require('redis');
-var client = redis.createClient(6379, 'redishost', {no_ready_check: true});
-const password= process.env.PASSWORD
-client.auth(password, function (err) {
-    if (err) then throw err;
-});
+const app = express()
+const port = 3000
+var output= 0
+var client = redis.createClient(6379, 'redishost.service_discovery', {no_ready_check: true});
 
 client.on('error', function (err) {
     console.log('Error ' + err);
@@ -19,11 +16,10 @@ client.on('connect', function() {
 client.set("foo", "bar", redis.print);
 
 client.get("foo", function (err, reply) {
-    if (err) then throw err;
-    console.log(reply.toString());
+    output = reply.toString();
 });
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Hello World!\n'+ 'redis output ' + output)
   })
   
   app.listen(port, () => {
