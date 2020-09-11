@@ -13,9 +13,9 @@ client.on('connect', function() {
     console.log('Connected to Redis');
 });
 
-client.set("foo", "bar", redis.print);
+client.set("env", "testing", redis.print);
 
-client.get("foo", function (err, reply) {
+client.get("env", function (err, reply) {
     output = reply.toString();
 });
 app.get('/', (req, res) => {
