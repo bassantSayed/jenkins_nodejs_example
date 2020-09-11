@@ -1,7 +1,7 @@
 const express = require('express')
 var redis = require('redis');
 const app = express()
-const port = 3000
+const port = 3001
 var output= 0
 var client = redis.createClient(6379, 'redishost.service_discovery', {no_ready_check: true});
 
